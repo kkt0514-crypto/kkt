@@ -1,0 +1,13 @@
+# maestro: raw
+# B3LYP/6-31G(d) gas-phase H2 optimization and analytic frequency calculation.
+! B3LYP 6-31G(d) TightSCF Opt Freq Mass2016
+
+%freq
+  Temp 298.15
+  Pressure 1.0
+end
+
+* xyz 0 1
+  H  0.000000  0.000000  0.000000
+  H  0.000000  0.000000  0.741400
+*
