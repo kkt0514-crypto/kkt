@@ -9,15 +9,18 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
 #SBATCH --time=01:00:00
+#SBATCH --nodelist=node4
 #SBATCH --output=h2d2hd-thermo-%j.out
 #SBATCH --error=h2d2hd-thermo-%j.err
 
 set -euo pipefail
 module load orca/v6.0.1
 
-# The electronic Hessian is isotope-independent.  Calculate it once for H2,
-# then substitute nuclear masses in independent copies for H2, D2, and HD.
-orca h2_optfreq.inp > h2_optfreq.out
+# The electronic Hessian is isotope-independent. Reuse a completed H2 Hessian
+# when available; otherwise calculate it once before isotope reanalysis.
+if [[ ! -s h2_optfreq.hess ]]; then
+  orca h2_optfreq.inp > h2_optfreq.out
+fi
 
 make_isotopologue_hess() {
   local output=$1
@@ -43,12 +46,30 @@ make_isotopologue_hess h2.hess 1.00782503223 1.00782503223
 make_isotopologue_hess d2.hess 2.01410177812 2.01410177812
 make_isotopologue_hess hd.hess 1.00782503223 2.01410177812
 
-orca_vib h2.hess > h2.vib.out
-orca_vib d2.hess > d2.vib.out
-orca_vib hd.hess > hd.vib.out
+make_thermo_input() {
+  local species=$1
+  cat > "${species}_thermo.inp" <<EOF
+! PrintThermoChem
+%geom
+  inhessname "${species}.hess"
+end
+%freq
+  Temp 298.15
+  Pressure 1.0
+end
+* xyzfile 0 1 h2_optfreq.xyz
+EOF
+}
+
+# Re-evaluate thermochemistry from the isotope-specific Hessian.  ORCA's
+# PrintThermoChem mode reads the geometry and force constants from inhessname.
+for species in h2 d2 hd; do
+  make_thermo_input "$species"
+  orca "${species}_thermo.inp" > "${species}.thermo.out"
+done
 
 for species in h2 d2 hd; do
-  awk '/Final Gibbs free energy/ {print $0}' "${species}.vib.out" > "${species}.gibbs.txt"
+  awk '/Final Gibbs free energy/ {print $0}' "${species}.thermo.out" > "${species}.gibbs.txt"
 done
 
 extract_gibbs() {
@@ -65,9 +86,9 @@ extract_gibbs() {
   ' "$1"
 }
 
-g_h2=$(extract_gibbs h2.vib.out)
-g_d2=$(extract_gibbs d2.vib.out)
-g_hd=$(extract_gibbs hd.vib.out)
+g_h2=$(extract_gibbs h2.thermo.out)
+g_d2=$(extract_gibbs d2.thermo.out)
+g_hd=$(extract_gibbs hd.thermo.out)
 delta_g_eh=$(awk -v h2="$g_h2" -v d2="$g_d2" -v hd="$g_hd" 'BEGIN {printf "%.12f", 2*hd-h2-d2}')
 delta_g_kj_mol=$(awk -v dg="$delta_g_eh" 'BEGIN {printf "%.6f", dg*2625.49962}')
 delta_g_kcal_mol=$(awk -v dg="$delta_g_eh" 'BEGIN {printf "%.6f", dg*627.509474}')

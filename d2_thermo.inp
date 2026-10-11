@@ -1,0 +1,9 @@
+! PrintThermoChem
+%geom
+  inhessname "d2.hess"
+end
+%freq
+  Temp 298.15
+  Pressure 1.0
+end
+* xyzfile 0 1 h2_optfreq.xyz

@@ -1,0 +1,98 @@
+Reading file: d2.hess  ... done
+Mass weighting the hessian        ... done
+Symmetrizing the hessian          ... done
+Calculating the normal modes      ... done
+Scaling frequencies               ...  1.000000000 - done
+Mass weighting and projection     ... done
+Symmetrizing the hessian          ... done
+Calculating the internal modes    ... done
+
+-----------------------
+VIBRATIONAL FREQUENCIES
+-----------------------
+
+Scaling factor for frequencies =  1.000000000 (Found in file - NOT applied to frequencies read from HESS file)
+
+   0:         0.00 cm**-1
+   1:         0.00 cm**-1
+   2:         0.00 cm**-1
+   3:         0.00 cm**-1
+   4:         0.00 cm**-1
+   5:      3148.69 cm**-1
+
+
+------------
+NORMAL MODES
+------------
+
+These modes are the Cartesian displacements weighted by the diagonal matrix
+M(i,i)=1/sqrt(m[i]) where m[i] is the mass of the displaced atom
+Thus, these vectors are normalized but *not* orthogonal
+
+                  0          1          2          3          4          5    
+      0       0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+      1       0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+      2       0.000000   0.000000   0.000000   0.000000   0.000000  -0.707107
+      3       0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+      4       0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000   0.707107
+
+
+-----------
+IR SPECTRUM
+-----------
+
+ Mode    freq (cm**-1)   T**2         TX         TY         TZ
+-------------------------------------------------------------------
+   5:      3148.69    0.000000  (  0.000000   0.000000   0.000000)
+
+
+--------------------------------------
+APPROXIMATE STRETCHING FORCE CONSTANTS
+--------------------------------------
+
+
+NN FOR ATOM                   0:      1   
+TYPE                           :     H-H  
+BOND LENGTH (ANGSTROEM)         :    0.7430
+FORCE CONSTANT (MDYNE/ANGSTROEM):    5.8827
+
+NN FOR ATOM                   1:      0   
+TYPE                           :     H-H  
+BOND LENGTH (ANGSTROEM)         :    0.7430
+FORCE CONSTANT (MDYNE/ANGSTROEM):    5.8827
+
+
+
+----------------------------------------------
+BOND STRETCHES PARTITIONING AMONG NORMAL MODES (by Taras Petrenko)
+----------------------------------------------
+
+
+                  0    
+                 H-H
+                 0-  1 
+      0       0.000000
+      1       0.000000
+      2       0.000000
+      3       0.000000
+      4       0.000000
+      5       1.000000
+
+
+
+------------------------------------------------
+BOND STRETCHES PARTITIONING AMONG INTERNAL MODES (by Taras Petrenko)
+------------------------------------------------
+
+
+                  0    
+                 H-H
+                 0-  1 
+      0       0.000000
+      1       0.000000
+      2       0.000000
+      3       0.000000
+      4       0.000000
+      5       1.000000
+

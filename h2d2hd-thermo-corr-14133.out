@@ -1,0 +1,8 @@
+H2 + D2 -> 2 HD isotope thermochemistry
+T = 298.15 K; p = 1.00 atm; optimized H-H distance = 0.742957 A
+Electronic energy cancels; nuclear-spin statistical weights are excluded.
+G_corr(H2) = -3.536765 kJ/mol; stretch = 4451.22 cm^-1; sigma = 2
+G_corr(D2) = -15.618568 kJ/mol; stretch = 3148.69 cm^-1; sigma = 2
+G_corr(HD) = -11.037389 kJ/mol; stretch = 3855.36 cm^-1; sigma = 1
+DeltaG [2 HD - H2 - D2] = -2.919445 kJ/mol
+DeltaG [2 HD - H2 - D2] = -0.697764 kcal/mol
