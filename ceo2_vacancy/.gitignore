@@ -1,0 +1,7 @@
+*.gbw
+*.tmp
+*.tmp.*
+*.densities
+*.densitiesinfo
+*.hess
+*.engrad

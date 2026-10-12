@@ -1,0 +1,13 @@
+! PBE0 D3BJ def2-SVP RIJCOSX SlowConv TightSCF NoSym SP
+%pal
+  nprocs 4
+end
+%maxcore 1500
+%scf
+  MaxIter 500
+end
+%output
+  Print[P_Mulliken] 1
+  Print[P_Loewdin] 1
+end
+* xyzfile 0 3 /home/acc-2026-31458/kkt/ceo2_vacancy/01_o2_work/qm/run/01_o2_triplet.xyz
